@@ -29,10 +29,10 @@ repositories {
 dependencies {
     annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
 
-    implementation("org.springframework.boot:spring-boot-starter-web:${lombokVersion}")
+    implementation("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
     implementation("org.projectlombok:lombok:${lombokVersion}")
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test:${lombokVersion}")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
 }
 
 test {
