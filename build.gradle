@@ -30,11 +30,15 @@ repositories {
 
 dependencies {
     annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
     implementation("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
     implementation("org.projectlombok:lombok:${lombokVersion}")
 
+    testAnnotationProcessor("org.projectlombok:lombok")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+    testImplementation("org.projectlombok:lombok")
     testImplementation("com.epages:restdocs-api-spec-mockmvc:${docsVersion}")
     // webflux 테스트 시 webTestClient 이용시 추가
     // testImplementation("com.epages:restdocs-api-spec-webtestclient:${docsVersion}")
@@ -50,4 +54,15 @@ openapi3 {
     version = "${version}"
     description = "spring-rest-docs-to-swagger-api example template"
     format = "yaml"
+}
+
+bootRun {
+    dependsOn 'openapi3'
+    doLast {
+        copy {
+            from "build/api-spec"
+            include "*.yaml"
+            into "build/resources/main/static/docs"
+        }
+    }
 }
