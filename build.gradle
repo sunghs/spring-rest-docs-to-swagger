@@ -57,7 +57,7 @@ openapi3 {
     format = "yaml"
 }
 
-task asd {
+task createOpenApi {
     dependsOn 'openapi3'
     doLast {
         copy {
@@ -69,5 +69,5 @@ task asd {
 }
 
 bootRun {
-    dependsOn 'asd'
+    dependsOn 'createOpenApi'
 }
