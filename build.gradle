@@ -4,6 +4,7 @@ buildscript {
         dependencyManagementVersion = "1.0.11.RELEASE"
         lombokVersion = "1.18.20"
         docsVersion = "0.11.3"
+        swaggerVersion = "3.0.0"
     }
 }
 
@@ -35,6 +36,8 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
     implementation("org.projectlombok:lombok:${lombokVersion}")
+    implementation("io.springfox:springfox-boot-starter:${swaggerVersion}")
+    implementation("io.springfox:springfox-swagger-ui:${swaggerVersion}")
     testImplementation("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
     testImplementation("org.projectlombok:lombok")
     testImplementation("com.epages:restdocs-api-spec-mockmvc:${docsVersion}")
@@ -47,14 +50,14 @@ test {
 }
 
 openapi3 {
-    server = ""
+    server = "" // base-path가 있다면 넣어준다.
     title = "spring-rest-docs-to-swagger-api"
     description = "spring-rest-docs-to-swagger-api example template"
     version = "${version}" as Object
     format = "yaml"
 }
 
-bootRun {
+task asd {
     dependsOn 'openapi3'
     doLast {
         copy {
@@ -63,4 +66,8 @@ bootRun {
             into "build/resources/main/static/docs"
         }
     }
+}
+
+bootRun {
+    dependsOn 'asd'
 }
