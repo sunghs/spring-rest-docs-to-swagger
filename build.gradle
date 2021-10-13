@@ -31,12 +31,10 @@ repositories {
 dependencies {
     annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+    testAnnotationProcessor("org.projectlombok:lombok")
 
     implementation("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
     implementation("org.projectlombok:lombok:${lombokVersion}")
-
-    testAnnotationProcessor("org.projectlombok:lombok")
-
     testImplementation("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
     testImplementation("org.projectlombok:lombok")
     testImplementation("com.epages:restdocs-api-spec-mockmvc:${docsVersion}")
@@ -51,8 +49,8 @@ test {
 openapi3 {
     server = ""
     title = "spring-rest-docs-to-swagger-api"
-    version = "${version}"
     description = "spring-rest-docs-to-swagger-api example template"
+    version = "${version}" as Object
     format = "yaml"
 }
 
