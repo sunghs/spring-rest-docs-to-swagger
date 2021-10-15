@@ -1,10 +1,7 @@
 package sunghs.openapi.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import sunghs.openapi.model.RequestDto;
 import sunghs.openapi.model.ResponseDto;
 import sunghs.openapi.service.OpenApiService;
@@ -17,7 +14,12 @@ public class OpenApiController {
     private final OpenApiService openApiService;
 
     @PostMapping("/post")
-    public ResponseDto run(@RequestBody final RequestDto requestDto) {
+    public ResponseDto post(@RequestBody final RequestDto requestDto) {
+        return openApiService.run(requestDto);
+    }
+
+    @GetMapping("/get")
+    public ResponseDto get(final RequestDto requestDto) {
         return openApiService.run(requestDto);
     }
 }

@@ -71,3 +71,11 @@ task createOpenApi {
 bootRun {
     dependsOn 'createOpenApi'
 }
+
+bootJar {
+    dependsOn 'openapi3'
+    from ("build/api-spec") {
+        include "*.yaml"
+        into "static/docs"
+    }
+}
